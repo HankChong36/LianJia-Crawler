@@ -1,6 +1,5 @@
 var Crawler = require("crawler");
 let baseUrl = "https://sh.lianjia.com/ershoufang/";
-var $ = null;
 
 // 最新
 var getLastest = new Crawler({
@@ -9,7 +8,7 @@ var getLastest = new Crawler({
     if (error) {
       console.log(error);
     } else {
-      $ = res.$;
+      var $ = res.$;
       let url = $(
         "#content > div.leftContent > div.orderFilter > div > ul > li:nth-child(2) > h3 > a"
       ).attr("href");
@@ -26,9 +25,9 @@ var getInfo = new Crawler({
     if (error) {
       console.log(error);
     } else {
-      $ = res.$;
+      var $ = res.$;
       $(
-        "#content > div.leftContent > ul > li:nth-child(30) > div.info.clear > div.address > div > a"
+        "#content > div.leftContent > ul > li > div.info.clear > div.address > div > a"
       ).each((i, el) => {
         const str = el.next.data.trim();
         let msgArr = [];
@@ -49,4 +48,4 @@ var getInfo = new Crawler({
   }
 });
 
-getLastest.queue(baseUrl);
+getInfo.queue(baseUrl);
